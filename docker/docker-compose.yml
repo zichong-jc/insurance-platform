@@ -1,0 +1,126 @@
+
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: insurance-postgres
+    environment:
+      POSTGRES_DB: insurance
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - insurance-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: insurance-redis
+    environment:
+      REDIS_PASSWORD: password
+    command: redis-server --requirepass password
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "password", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - insurance-network
+
+  minio:
+    image: minio/minio:latest
+    container_name: insurance-minio
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - insurance-network
+
+  minio-init:
+    image: minio/mc:latest
+    container_name: insurance-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      mc config host add minio http://minio:9000 admin password;
+      mc mb minio/insurance;
+      mc policy set public minio/insurance;
+      exit 0;
+      "
+    networks:
+      - insurance-network
+
+  insurance-web:
+    build:
+      context: ../insurance-web
+      dockerfile: Dockerfile
+    container_name: insurance-web
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/insurance
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PASSWORD: password
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: password
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/companies"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - insurance-network
+
+volumes:
+  postgres-data:
+  redis-data:
+  minio-data:
+
+networks:
+  insurance-network:
+    driver: bridge

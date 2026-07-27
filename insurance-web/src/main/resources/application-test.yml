@@ -1,0 +1,14 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/insurance_test
+
+ai:
+  provider: mock
+
+sync:
+  enabled: false
+
+logging:
+  level:
+    com.example.insurance: INFO
