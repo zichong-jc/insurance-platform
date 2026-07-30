@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum CompanyType {
-    
+
     PING_AN("PA", "平安保险"),
     PACIFIC("PC", "太平洋保险"),
     PICC("PI", "中国人保"),
@@ -14,6 +14,7 @@ public enum CompanyType {
     NEW_CHINA("NC", "新华保险"),
     TAIKANG("TK", "泰康保险"),
     ALLIANZ("AZ", "安联保险"),
+    PROPERTY("PR", "财产保险"),
     OTHER("OT", "其他");
 
     private final String code;

@@ -3,12 +3,12 @@ package com.example.insurance.web.service;
 
 import com.example.insurance.api.dto.request.InsuranceCompanyRequest;
 import com.example.insurance.api.dto.response.InsuranceCompanyResponse;
+import com.example.insurance.api.entity.InsuranceCompany;
 import com.example.insurance.api.enums.CompanyType;
+import com.example.insurance.api.repository.InsuranceCompanyRepository;
 import com.example.insurance.common.exception.ConflictException;
 import com.example.insurance.common.exception.ResourceNotFoundException;
-import com.example.insurance.web.entity.InsuranceCompany;
 import com.example.insurance.web.mapper.InsuranceCompanyMapper;
-import com.example.insurance.web.repository.InsuranceCompanyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

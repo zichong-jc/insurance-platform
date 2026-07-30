@@ -1,6 +1,7 @@
 
 package com.example.insurance.web.entity;
 
+import com.example.insurance.api.entity.InsuranceProduct;
 import com.example.insurance.api.enums.ParseStatus;
 import com.example.insurance.common.model.BaseEntity;
 import jakarta.persistence.*;

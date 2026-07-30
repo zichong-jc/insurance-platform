@@ -1,8 +1,7 @@
+package com.example.insurance.api.repository;
 
-package com.example.insurance.web.repository;
-
+import com.example.insurance.api.entity.InsuranceCompany;
 import com.example.insurance.api.enums.CompanyType;
-import com.example.insurance.web.entity.InsuranceCompany;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

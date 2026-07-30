@@ -3,7 +3,7 @@ package com.example.insurance.web.mapper;
 
 import com.example.insurance.api.dto.request.InsuranceCompanyRequest;
 import com.example.insurance.api.dto.response.InsuranceCompanyResponse;
-import com.example.insurance.web.entity.InsuranceCompany;
+import com.example.insurance.api.entity.InsuranceCompany;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

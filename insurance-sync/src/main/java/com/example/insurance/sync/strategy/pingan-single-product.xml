@@ -1,0 +1,1328 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>健康保险_健康保险哪个好_平安保险商城</title>
+        <meta name="keywords" content="健康保险_健康保险哪个好_平安保险商城" />
+        <meta name="description" content="疾病种类覆盖多，年龄覆盖广，提供一辈子的保障" />
+        <link rel="stylesheet" href="../baoxiancss/common/base.css" />
+        <link rel="stylesheet" href="../baoxiancss/product/public_new.css" />
+        <link rel="stylesheet" href="//baoxiancdn.pingan.com/baoxiancss/app_css/4008000000/v10/search.css" />
+        <link rel="stylesheet" href="../baoxiancss/product/productList.css" />
+        <script type="text/javascript" src="//baoxiancdn.pingan.com/app_js/paui/1.0.1/build/pa.ui.min.js"></script>
+        <script async src="//www.googletagmanager.com/gtag/js?id=UA-86814823-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+            dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-86814823-1');
+        </script>
+        <script src="../m/zizhulipei/js/mustache.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics  end-->
+        <style>
+            .pro_jkxbanner03 {
+            background: url(../../baoxianimg/product/espanewBanner.jpg) no-repeat center;
+            }
+
+            .pro_jkxbanner04 {
+            background: url(../../baoxianimg/product/espajtbBannerNew.jpg) no-repeat center;
+            }
+
+            .pro_jkxbanner05 {
+            background: url(../../baoxianimg/product/jwyplusBanner.jpg) no-repeat center;
+            }
+
+            .pro_jkxbanner06 {
+            background: url(./highendMedical/images/banner.jpg) no-repeat center;
+            }
+
+            .tehui-tips {
+            z-index: 9;
+            position: absolute;
+            right: -5px;
+            top: 10px;
+            width: 100px;
+            height: 45px;
+            background: url(//baoxiancdn.pingan.com/baoxianimg/index/tehui.png) no-repeat;
+            }
+
+            .xinpin-tips {
+            z-index: 9;
+            position: absolute;
+            right: -5px;
+            top: 10px;
+            width: 100px;
+            height: 45px;
+            background: url(/baoxianimg/index/xinpin.png) no-repeat;
+            }
+
+            .yiqing0224_9zhe {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 160px;
+            width: 360px;
+            height: 80px;
+            background: url(/baoxianimg/activity/yiqing0224_9zhe.png) no-repeat;
+            }
+
+            .yiqing0224_95zhe {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 160px;
+            width: 360px;
+            height: 80px;
+            background: url(/baoxianimg/activity/yiqing0224_95zhe.png) no-repeat;
+            }
+
+            /* .qm_jbLogn{position:absolute;right:0;top:160px;width:360px;height:80px;background:url(/baoxianimg/activity/qm_jbLogn.png) no-repeat;} */
+            .rol {
+            height: 420px;
+            /* overflow: hidden; */
+            }
+        </style>
+        <script type="text/javascript">
+            window.gProductName = "健康产品列表";
+            window.gProductCode = "P-jiankang";
+            window.PageLevel = 'PC_0';
+            window.productPage = '健康产品列表';
+        </script>
+    </head>
+
+    <body>
+        <!-- 产品卡片模板 -->
+        <template id="productTemplate" style="display: none;">
+            <li>
+                <a target="_blank" href="{{productUrl}}" title="{{productName}}"
+                   otitle="{{productName}}" otype="button" class="list_img_a">
+                    <img src="{{productPic}}"
+                         alt="{{productName}}" width="360" height="240" />
+                    <div class="showAct"></div>
+                </a>
+                <div class="list_product_nr por">
+                    <a target="_blank" href="{{productUrl}}" title="{{productName}}"
+                       otitle="{{productName}}" otype="button" class="list_title_a">{{productName}}</a>
+                    <p class="list_desc">{{productDesc}}</p>
+                </div>
+                <p class="list_price"><span class="price_span">{{productPrice}}</span>{{priceUnit}}</p>
+                <a href="{{productUrl}}" target="_blank" title="立即投保"
+                   otitle="立即投保-{{productName}}" otype="button" class="list_ljtb_a"
+                   onClick="hrefChangeByMediaSource(this);">立即投保</a>
+                {{#hotProductFlag}}<p class="remai-tips"></p>{{/hotProductFlag}}
+            </li>
+        </template>
+        <!-- START: 公用头部 -->
+        <div class="header">
+            <!--[if lte IE 6]>
+      <script
+        src="//baoxiancdn.pingan.com/app_js/pingan/v20/caifu/DD_belatedPNG.js"
+        type="text/javascript"
+      ></script>
+      <script type="text/javascript">
+        DD_belatedPNG.fix("i ,a ,label ,.fixed_wx,.bbhj-wxbox");
+      </script>
+    <![endif]-->
+            <!-- <script src="/baoxianjs/kanyun/agent.min.js"></script> -->
+            <link rel="icon" href="favicon.ico" type="image/x-icon" />
+            <div class="header header-bg" id="nav_index">
+                <!--登录，注册头部 start-->
+                <div class="baoxian_head wrap c">
+                    <p class="kefu_gf">
+                        官方客服：<span class="fcfe6100">4008895512转2（企业客户转3） </span>
+                    </p>
+                    <!--<p class="kefu_gf c" style="background:#f1f0ec; line-height: 26px; height:26px; width:310px; padding:0 8px;
+                        top:8px; color: #f00;"><i style="display: inline-block;width: 28px;height: 20px;background:url(//pimg1.4008000000.com/app_images/baoxian/v10/baoxian_index/laba.png) no-repeat;margin-top:3px; float:left;"></i><span style="margin-left: 4px; float:left;">系统提示:</span>
+                        <marquee  direction="left" style="float:left; width:210px; margin-left:5px;"> 10月25日21:00 —— 10月26日08:00 平台升级维护,保单查询、发票查询等部分功能将受到影响,请您选择其它时间段使用~</marquee></p> -->
+                    <div class="baoxian_logo">
+                        <a href="/index.shtml" title="保险商城" otitle="保险商城" otype="button">保险商城</a>
+                    </div>
+                    <div class="deng_long_div deng_long_div_6 dsn">
+                        <a class="deng_long_a" href="/pa18shopnst/nstShop/index.html#/activity/activityone" title="财神节活动" otitle="财神节活动"
+                           otype="entry" target="_blank">
+                            <img class="deng_long" src="../../../baoxianimg/product/2021/20211229_logo.gif" alt="财神节活动" />
+                        </a>
+                    </div>
+                    <!-- <a href="/pa18shopnst/era/order/index.shtml" target="_blank" class="customer_new zxkefu" title="新会员入口" otitle="新会员入口" otype="button"></a> -->
+                    <!-- <a href="/zaixiankefu/index.shtml" target="_blank" class="kefu zxkefu" title="在线客服" otitle="在线客服" otype="button"><i class="index_jqr"></i>在线客服</a> -->
+                    <div class="baoxian_head_search blur c">
+                        <div class="search_pasug dsn c">
+                            <ul class="c"></ul>
+                        </div>
+                        <input type="text" id="keyword" title="请输入关键字" otitle="搜索输入框-页头搜索区" otype="button"
+                               class="baoxian_head_search_input" value="" style="color: rgb(171, 169, 169);" />
+                        <a class="baoxian_head_search_btn" href="javascript:var bd_sousuo;" onclick="common_search_baoxian('');"
+                           title="搜索" otitle="搜索按钮-页头搜索区"  otype="button" hidefocus="hidefocus"></a>
+                    </div>
+                    <div class="fr c search_width">
+                        <div class="userInfor">
+                            <div id="logspan" class="topbar_left">
+                                <div class="MyUser">
+                                    <!-- onclick="doLogon(target);" -->
+                                    <div class="my_userbtn my_login" onclick="doLogon();" title="" otitle="登录" otype="button">
+                                        登录<i class="arrow_down"></i>
+                                    </div>
+                                    <!-- <a class="my_userbtn my_login"  id="login" href="javascript:;"  title="" otitle="登录" otype="button">登录<i class="arrow_down"></i></a> -->
+                                    <div class="foot-ewm-bdxgleft" id="ewm-bdxgleft">
+                                        <!-- <img src="//baoxiancdn.pingan.com/baoxianimg/index/foot-bdxgbtn.png" alt="保单修改" width="250" height="260" /> -->
+                                        <img src="../../../baoxianimg/activity/20201111img/ewm-right.png" alt="保单修改" width="250" height="260" />
+                                    </div>
+                                    <ul class="c login_ul">
+                                        <li class="down_topbg"></li>
+                                        <li class="active">
+                                            <a href="/pa18shopnst/era/order/index.shtml" target="_blank" otitle="订单管理-我的账户" otype="menu">订单管理</a>
+                                        </li>
+                                        <li id="myorder-modify">
+                                            <a href="javascript:;" otitle="保单修改-我的账户" otype="menu">
+                                                保单修改
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/pa18shopnst/era/order/index.shtml" target="_blank" otitle="申请理赔-我的账户" otype="menu">申请理赔</a>
+                                        </li>
+                                        <li>
+                                            <a href="/baoxianfuwu/index.shtml" target="_blank" otitle="更多服务-我的账户" otype="menu">更多服务</a>
+                                        </li>
+                                        <li class="last_xb">
+                                            <i class="icon_xbtips"></i>
+                                            <a href="/pa18shopnst/era/order/index.shtml" target="_blank" otitle="优惠续保-我的账户" otype="menu">优惠续保</a>
+                                        </li>
+                                        <li class="down_bottombg"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="lgoutspan" style="display:none;" class="topbar_left">
+                                <div class="MyUser">
+                                    <p>我的账户<i class="arrow_down"></i></p>
+                                    <div class="foot-ewm-bdxgleft" id="ewm-mybdxgleft">
+                                        <!-- <img src="//baoxiancdn.pingan.com/baoxianimg/index/foot-bdxgbtn.png" alt="保单修改" width="250" height="260" /> -->
+                                        <img src="../../../baoxianimg/activity/20201111img/ewm-right.png" alt="保单修改" width="250" height="260" />
+                                    </div>
+                                    <ul class="c">
+                                        <li class="down_topbg"></li>
+                                        <li class="active">
+                                            <a href="/pa18shopnst/era/order/index.shtml" target="_blank" otitle="订单管理-我的账户" otype="menu">订单管理</a>
+                                        </li>
+                                        <!--<li>
+                                                          <a href="/member/order/policy-list.shtml" target="_blank" otitle="订单修改-我的账户" otype="menu">订单修改</a>
+                                                      </li>-->
+                                        <li id="myorder-mymodify">
+                                            <a href="javascript:;" otitle="保单修改-我的账户" otype="menu">
+                                                保单修改
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/pa18shopnst/era/order/index.shtml" target="_blank" otitle="申请理赔-我的账户" otype="menu">申请理赔</a>
+                                        </li>
+                                        <li>
+                                            <a href="/baoxianfuwu/index.shtml" target="_blank" otitle="更多服务-我的账户" otype="menu">更多服务</a>
+                                        </li>
+                                        <li class="last_xb">
+                                            <i class="icon_xbtips"></i>
+                                            <a href="/pa18shopnst/era/order/index.shtml" target="_blank" otitle="优惠续保-我的账户" otype="menu">优惠续保</a>
+                                        </li>
+                                        <li class="down_bottombg"></li>
+                                    </ul>
+                                </div>
+                                <span class="linexian"></span>
+                                <a class="my_userbtn" href="javascript:var bd_back;" id="myLoginOut" title="退出" otitle="退出-顶部"
+                                   otype="button">退出</a>
+                            </div>
+                        </div>
+                        <a class="index_phone" title="" otitle="扫一扫，手机逛起来-手机端">
+                            <div class="index_pwenben">
+                                <i class="phone_ewm"></i>
+                                <span class="phone_title">手机端</span>
+                            </div>
+                            <div class="phone_down">
+                                <i class="phone_ewmbig"></i>
+                                <p class="tac index_sys">扫一扫，手机逛起来</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!--登录，注册头部 end-->
+            </div>
+
+            <!-- 清明活动 -->
+            <!-- <div class="dialog1 dsn">
+                <div class="por">
+                    <a href="/pa18shopnst/new/activity/20210120/index.html" target="_blank" title="春节活动" otitle="春节活动">
+                        <img src="../../../baoxianimg/activity/202101/flot_right.png" width="200" height="240" />
+                    </a>
+                    <a class="csy_r_close" onclick="$('.dialog1').hide();" href="javascript:;" title="关闭" otitle="关闭"></a>
+                </div>
+            </div> -->
+
+            <style type="text/css">
+                .foot-ewm-bdxgleft {
+                z-index: 9;
+                position: absolute;
+                left: -300px;
+                top: 45px;
+                width: 250px;
+                height: 260px;
+                display: none;
+                }
+
+                #ewm-mybdxgleft {
+                left: -260px;
+                }
+
+                .phone_ewmbig {
+                background: url(//baoxiancdn.pingan.com/baoxianimg/headFoot/phone_ewmbig.png) no-repeat;
+                }
+
+                .deng_long_div {
+                position: absolute;
+                left: 200px;
+                top: 5px;
+                width: 150px;
+                height: 75px;
+                }
+
+                .deng_long_a {
+                width: 100%;
+                height: 100%;
+                display: block;
+                }
+
+                .baoxian_head_search_btn {
+                width: 60px;
+                height: 40px;
+                float: right;
+                display: block;
+                background: url(../../../baoxianimg/app_images/baoxian/v10/baoxian_index/index_search.png) no-repeat center;
+                }
+
+                .index_phone {
+                position: relative;
+                float: right;
+                padding-top: 10px;
+                display: block;
+                padding-right: 100px;
+                }
+
+                .baoxian_head_search_input {
+                width: 320px;
+                float: left;
+                font-size: 14px;
+                color: #666;
+                padding: 8px 0 9px 16px;
+                border-radius: 20px 0 0 20px;
+                border: 0;
+                }
+
+                .baoxian_head_search_btn {
+                margin-right: 0px;
+                margin-top: 0px;
+                }
+
+                .search_width {
+                width: 340px;
+                }
+
+                /* .deng_long_a {position: absolute;left: 200px;top: 10px;display: block;width: 150px;height: 75px;}
+                .deng_long{position: absolute;left: 200px;top: 10px;display: block;width: 150px;height: 75px;} */
+                .header-bg {
+                background: url(//baoxiancdn.pingan.com/baoxianimg/index/chunhua.jpg) no-repeat center;
+                }
+
+                .login-content .logo,
+                .login-content .special-logo,
+                .login-content .header-guide,
+                .login-content .header-phone,
+                .login-content .header-qr,
+                .login-content .qrLogin {
+                display: none;
+                }
+
+                .login-content .section,
+                .login-content .footer .protocol,
+                .login-content .protocol {
+                display: block;
+                }
+
+                .dialog1 {
+                z-index: 1000;
+                }
+            </style>
+            <link rel="stylesheet" href="/product/css/ad.css" />
+            <script src="//baoxiancdn.pingan.com/pa18shopnst/paui/pa.ui.min.js"></script>
+            <script type="text/javascript" src="/baoxianjs/public/xss.js"></script>
+            <script type="text/javascript" src="//baoxiancdn.pingan.com/app_js/paui/1.0.1/build/pa.ui.min.js"></script>
+            <script type="text/javascript" src="//baoxiancdn.pingan.com/baoxianjs/app_js/4008000000/v20/add_partnerid.js"></script>
+            <script type="text/javascript" src="/zixun/baoxian/search/keywords.js"></script>
+            <script type="text/javascript" src="/baoxianjs/public/baoxian_header.js"></script>
+            <script>
+                (function () {
+                var one = new Date(2022, 0, 4, 23, 59, 59).getTime();
+                var two = new Date(2022, 1, 8, 23, 59, 59).getTime();
+                var now = new Date().getTime();
+                if (now > one && now < two) {
+                $(".deng_long_div_6").removeClass("dsn");
+                }
+                })();
+            </script>
+            <script>
+                if (window.top != window.self && location.href.indexOf("mycart.html") == -1) {
+                top.location.href = location.href;
+                }
+                var hostname = window.location.hostname;
+                var urlName = "";
+                var isReg = /baoxian.pingan.com/.test(hostname);
+                urlName = !isReg
+                ? "https://test-hcz-static.pingan.com.cn"
+                : "https://hcz-static.pingan.com.cn";
+                var fileUrlLists = [
+                debugHost + "/pa18shopnst/common/js/jquery.qrcode.min.js",
+                urlName + "/fin-common/umc-uni-vendor/pc-login/lib/paweb.js",
+                urlName + "/fin-common/umc-uni-vendor/pc-login/lib/handlebars.js",
+                "https://hcz-static.pingan.com.cn/fin-common/umc-uni-vendor/pc-login/lib/login-union.js",
+                urlName + "/fin-common/umc-uni-vendor/pc-login/core.js",
+                urlName + "/fin-common/umc-uni-vendor/pc-login/umc-ui.js",
+                debugHost + "/pa18shopnst/common/js/loginSucc.js"
+                ];
+                var src01 = [
+                { href: urlName + "/fin-common/umc-uni-vendor/pc-login/css/style.css" }
+                ];
+                var relies = fileUrlLists;
+                loadFiles(src01);
+                loadScripts(relies, function cb(err) {
+                if (err) {
+                return console.log(err.message);
+                }
+                });
+            </script>
+            <!--菜单导航 start-->
+            <div class="navlist por">
+                <i class="icon_qiye incon_qiyehot"><span class="dsn">hot</span></i>
+            </div>
+            <div id="active_bg" class="navall por">
+                <ul class="navlist c clear">
+                    <li class="fl navlist_li">
+                        <a
+                                id="active_index"
+                                href="/index.shtml"
+                                title="首页"
+                                otitle="首页"
+                                otype="menu"
+                                class="navlist_li_a "
+                        >首页</a
+                        >
+                    </li>
+                    <li id="active_enter" class="fl navlist_li dsn active_enter">
+                        <a
+                                href="/pa18shopnst/new/activity/20211111/index.html"
+                                target="_blank"
+                                title="双十一活动"
+                                otitle="双十一活动"
+                                otype="menu"
+                                class="navlist_li_a"
+                        ></a>
+                    </li>
+                    <!-- <li id="active_fugong" class="fl navlist_li">
+                            <a href="/pa18shopnst/new/activity/corporateGroupsActive/index.html" target="_blank" title="复工有礼"
+                                otitle="复工有礼" otype="menu" class="navlist_li_a navlist_li_a2"></a>
+                        </li> -->
+                    <li class="fl navlist_li all_pro_li">
+                        <a
+                                href="/product/allbaoxianlist.shtml"
+                                target="_blank"
+                                title="所有产品"
+                                otitle="所有产品"
+                                otype="menu"
+                                class="navlist_li_a"
+                        ><i class="nav_allicon"></i>所有产品</a
+                        >
+                    </li>
+
+                    <li class="fl navlist_li menuShow">
+                        <a
+                                href="/product/jiankangbaoxian.shtml"
+                                target="_blank"
+                                title="健康保险"
+                                otitle="健康保险"
+                                otype="menu"
+                                class="navlist_li_a"
+                        >健康保险</a
+                        >
+                    </li>
+                    <li class="fl navlist_li menuShow">
+                        <a
+                                href="/product/yiwaibaoxian.shtml"
+                                target="_blank"
+                                title="意外保险"
+                                otitle="意外保险"
+                                otype="menu"
+                                class="navlist_li_a"
+                        >意外保险</a
+                        >
+                    </li>
+                    <li class="fl navlist_li menuShow">
+                        <i></i>
+                        <a
+                                href="/product/qiyebaoxian.shtml"
+                                target="_blank"
+                                title="企业保险"
+                                otitle="企业保险"
+                                otype="menu"
+                                class="navlist_li_a"
+                        >企业保险</a
+                        >
+                    </li>
+                    <li class="fl navlist_li menuShow">
+                        <a
+                                href="/product/lvyoubaoxian.shtml"
+                                target="_blank"
+                                title="旅行保险"
+                                otitle="旅行保险"
+                                otype="menu"
+                                class="navlist_li_a"
+                        >旅行保险</a
+                        >
+                    </li>
+                    <li class="fl navlist_li menuShow">
+                        <a
+                                href="/product/caichanbaoxian.shtml"
+                                target="_blank"
+                                title="居家财险"
+                                otitle="居家财险"
+                                otype="menu"
+                                class="navlist_li_a"
+                        >居家财险</a
+                        >
+                    </li>
+                    <li class="fl navlist_li dsn">
+                        <a
+                                href="/product/activityCenter.shtml"
+                                target="_blank"
+                                title="活动中心"
+                                otitle="活动中心"
+                                otype="menu"
+                                class="navlist_li_a"
+                        ><i class="nav_activity"></i>活动中心</a
+                        >
+                    </li>
+                    <li class="fl navlist_li">
+                        <a
+                                href="//www.4008000000.com/cpchexian/sem/pinzhuanduosheng.shtml"
+                                target="_blank"
+                                title="车险专区"
+                                otitle="车险专区"
+                                otype="menu"
+                                class="navlist_li_a"
+                        >车险专区</a
+                        >
+                    </li>
+                    <li class="fl navlist_li" style="padding: 0 10px;">
+                        <a
+                                href="//one.pingan.com.cn/pa/paone-service/nologin/index.do?appId=11068"
+                                target="_blank"
+                                title="我的一账通"
+                                otitle="我的一账通"
+                                otype="menu"
+                                class="navlist_li_a nav_payzt"
+                        ></a>
+                    </li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+                // 12.12活动图片
+                (function() {
+                var one = new Date(2021, 10, 4, 23, 59, 59).getTime();
+                var two = new Date(2021, 10, 15, 23, 59, 59).getTime();
+                var now = new Date().getTime();
+                if (now > one && now < two) {
+                $("#active_bg").addClass("active_bg");
+                $("#active_enter").removeClass("dsn");
+                $("<link>")
+                .attr({
+                rel: "stylesheet",
+                type: "text/css",
+                href: "/baoxiancss/common/active.css"
+                })
+                .appendTo("head");
+                } else {
+                $("#active_enter").remove();
+                $("<link>")
+                .attr({
+                rel: "stylesheet",
+                type: "text/css",
+                href: "/baoxiancss/common/not_active.css"
+                })
+                .appendTo("head");
+                }
+                })();
+            </script>
+            <div class="por z_index3 dropd">
+                <div class="dropdown poa" id="navBox_list">
+                    <!--这里展示导航菜单-->
+                </div>
+            </div>
+            <script
+                    type="text/javascript"
+                    src="/baoxianjs/public/baoxian_navMenu.js"
+            ></script>
+            <!--菜单导航 end-->
+            <style>
+                .nav_activity {
+                position: relative;
+                top: -1px;
+                width: 18px;
+                height: 18px;
+                display: inline-block;
+                background: url(../../../baoxianimg/app_images/baoxian/v10/baoxian_index/hot.png)
+                no-repeat;
+                vertical-align: middle;
+                margin-right: 8px;
+                }
+
+                /* .navlist {
+                margin: 0 auto;
+                width: 85%;
+                } */
+                .navlist li {
+                width: 9%;
+                }
+                .incon_qiyehot {
+                left: 415px;
+                }
+
+                #active_fugong {
+                background: url(../../../baoxianimg/activity/fugongyouli.png) no-repeat
+                center;
+                }
+
+                .navlist_li_a2:hover {
+                background-color: #333;
+                opacity: 0.2;
+                }
+            </style>
+
+        </div>
+        <!-- END: 公用头部 -->
+        <!-- START: 正文 -->
+        <!-- START: 正文 -->
+        <div class="list_main por">
+            <div class="rol por">
+                <!--banner 轮播-->
+                <div class="por w1200">
+                    <a class="btn_arrow prev_btn" href="javascript:;" title="向左" otitle="向左" otype="button"></a>
+                    <a class="btn_arrow next_btn" href="javascript:;" title="向右" otitle="向右" otype="button"></a>
+                </div>
+
+                <ul class="rollist" id="rollist"></ul>
+                <div class="rolcen por">
+                    <ol class="roldot poa" id="roldot_Box"></ol>
+                </div>
+                <!--banner 轮播 end-->
+                <script type="text/javascript">
+                    //banner图片切换
+                    (function () {
+                    var bannerData=[];
+                    var bannerType = ""
+                    if(location.href.indexOf("jiankangbaoxian.shtml") > -1){
+                    bannerType = "HEALTHY";
+                    }else if(location.href.indexOf("yiwaibaoxian.shtml") > -1){
+                    bannerType = "ACCIDENT";
+                    }else if(location.href.indexOf("qiyebaoxian.shtml") > -1){
+                    bannerType = "ENTERPRISE";
+                    }else if(location.href.indexOf("lvyoubaoxian.shtml") > -1){
+                    bannerType = "TOUR";
+                    }else if(location.href.indexOf("caichanbaoxian.shtml") > -1){
+                    bannerType = "PROPERTY";
+                    }else {
+                    bannerType = "HOME";
+                    }
+                    $.ajax({
+                    type:"get",
+                    url:"/pa18shopnst/do/websiteBanner/getBannerByType?bannerType=" + bannerType,
+                    async:false,
+                    dataType: "json",
+                    success: function (res) {
+                    if(res.resultCode == "200"){
+                    var bannerPictureDTOList = res.data.bannerPictureDTOList;
+                    for(var i = 0;i< bannerPictureDTOList.length;i++){
+                    var item = bannerPictureDTOList[i];
+                    var bannerItem = {
+                    imgUrl: item.picUrl,
+                    url: item.targetUrl
+                    }
+                    bannerData.push(bannerItem);
+                    }
+                    }else {
+                    console.error && console.error(res.resultMsg);
+                    }
+                    },
+                    error: function () {
+                    console.error && console.error('网络错误，请稍后再试！');
+                    }
+                    })
+                    //IE 验证一下
+                    if(  $("#rollist").length==0 ){
+                    throw new Error("banner error");
+                    return;
+                    }
+                    var sTemp='';
+                    $.each(bannerData,function(idx,item){
+                    if( item.hide ) return true;
+                    sTemp+='<li class="rollist_li poa">'
+                    sTemp+='<a href="'+item.url+'"'
+                    sTemp+='target="_blank" style="background-image:url('+item.imgUrl+')" otype="entry" class="rollist_li_a"></a>'
+                    sTemp+='</li>'
+                })
+                //生成banner轮播图html元素
+                $("#rollist").html(sTemp);
+
+                var roldot_Arr=[];
+                $("#rollist .rollist_li").each(function(idx){
+                if( idx==0 ){
+                $(this).show();
+                }
+                roldot_Arr.push("<li><span></span></li>");
+                })
+                $("#roldot_Box").append(roldot_Arr.join(""))
+                $("#roldot_Box li").eq(0).addClass("active");
+
+                var i = 0;
+                var j = 1;
+                $('#roldot_Box li').on('click', function () {
+                var index = $(this).index();
+                $(this).addClass('active').siblings().removeClass('active');
+                $('.rollist').find('>li').eq(index).fadeIn(500).siblings().fadeOut(500);
+                i = index;
+                })
+                //点击右边按钮滚动
+                $(".next_btn").click(function () {
+                move();
+                })
+                //点击左边按钮滚动
+                $(".prev_btn").click(function () {
+                j--;
+                $('.rollist').find('>li').eq(j - 1).fadeIn(500).siblings().fadeOut(500);
+                $('.roldot').find('>li').eq(j - 1).addClass('active').siblings().removeClass('active');
+                if (j == 0) {
+                j = $('.rollist').find('>li').length;
+                $('.rollist').find('>li').eq(j).fadeIn(500).siblings().fadeOut(500);
+                }
+                i = j - 1;
+                })
+                function move() {
+                $('.rollist').find('>li').eq(i).fadeIn(500).siblings().fadeOut(500);
+                $('.roldot').find('>li').eq(i).addClass('active').siblings().removeClass('active');
+                i++;
+                if (i == $('.rollist').find('>li').length) {
+                i = 0;
+                }
+                }
+                setInterval(move, 5000);
+                })()
+            </script>
+        </div>
+        <!--产品列表 start-->
+        <div class="list_content">
+            <ul class="list_product c" id="all_product_list">
+
+            </ul>
+            <div class="list_pro_more">
+                <a class="list_pro_morebtn" href="javascript:;" title="更多" otitle="更多" otype="button">更多</a>
+            </div>
+        </div>
+        <!--产品列表 end-->
+    </div>
+    <!-- END: 正文 -->
+    <!--底部-->
+    <!-- 常见问题START-->
+    <script type="text/template" id="aqTemp">
+        <%_.each(aqlist,function(v,i){%>
+        <dl class="qa_box c">
+            <dt class="c">
+                <img src="//baoxiancdn.pingan.com/baoxianimg/app_images/baoxian/v10/index_new/h_cjwt1.png" width="80" height="80" alt="" />
+                <div class="qa_con por">
+                    <div class="qa_con1">
+                        <div class="qa_inner"><p><%=v.a%></p></div>
+                    </div>
+                </div>
+            </dt>
+            <dd>
+                <img src="//baoxiancdn.pingan.com/baoxianimg/app_images/baoxian/v10/index_new/h_cjwt2.png" width="80" height="80" alt="" />
+                <div class="qa_con por">
+                    <div class="qa_con1">
+                        <div class="qa_inner"><p class="por"><%=v.q%></p></div>
+                    </div>
+                </div>
+            </dd>
+        </dl>
+        <%})%>
+    </script>
+    <!-- 常见问题END-->
+
+    <!---条款开始-->
+    <div
+            id="viewPdf_mask"
+            class="ui-mask"
+            style="
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    opacity: 0.4;
+    background-color: rgb(0, 0, 0);
+    display: none;
+  "
+    ></div>
+    <div id="viewPdf" style="display: none">
+        <div class="line">
+            <a href="javascript:" class="poa aclose">x</a>
+            <div class="fl logoImg">
+                <img src="../../../logo/logo2208.png" />
+                <!-- <img src="//baoxiancdn.pingan.com/baoxianimg/headFoot/logonew.png" /> -->
+            </div>
+            <div class="fl" style="width: 450px">
+                <div class="ptitle">家财保险条款</div>
+                <ul class="ptbox">
+                    <li class="current">套餐</li>
+                </ul>
+            </div>
+            <p class="c"></p>
+        </div>
+        <div>
+            <div class="fl history">
+                <ul class="hisUl">
+                    <li>暂无条款</li>
+                </ul>
+            </div>
+            <div class="fl" style="width: 550px; height: 500px">
+                <iframe
+                        id="clause-iframe"
+                        src=""
+                        scrolling="auto"
+                        height="500"
+                        width="580"
+                        frameborder="0"
+                        noresize="noresize"
+                        border="0"
+                        marginwidth="0"
+                        framespacing="0"
+                        marginheight="0"
+                ></iframe>
+            </div>
+            <p class="c"></p>
+        </div>
+    </div>
+    <!---条款结束-->
+    <a id="jumpUrl" style="display: none" target="_blank" href=""></a>
+
+    <div class="footer">
+        <div class="fooder_all c">
+            <div class="fooder_left fl">
+                <ul class="c clear">
+                    <li class="fl">
+                        <p
+                                title="实用工具 "
+                                otitle="实用工具 "
+                                otype="menu"
+                                class="fs16 fc2c2c2c dis_b lin_h30 fwb"
+                        >
+                            关于平安
+                        </p>
+                        <a
+                                href="/pa18shopnst/era/order/index.shtml"
+                                target="_blank"
+                                title="会员账户 "
+                                otitle="会员账户 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2"
+                        >会员账户</a
+                        >
+                        <a
+                                href="/baoxianfuwu/toubaochangjianwenti.shtml"
+                                target="_blank"
+                                title="常见问题 "
+                                otitle="常见问题 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2 line_h08"
+                        >常见问题</a
+                        >
+                        <a
+                                href="/pa18shopnst/product/non-member/login.html"
+                                target="_blank"
+                                title="保单续保 "
+                                otitle="保单续保 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2 line_h10"
+                        >保单续保</a
+                        >
+                        <a
+                                href="/pa18shopnst/era/order/index.shtml"
+                                id="foot-bdxgbtn"
+                                title=""
+                                otitle="保单修改 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2 line_h10 por"
+                        >
+                            保单修改
+                            <div class="foot-ewm-bdxg dis_no">
+                                <img
+                                        src="//baoxiancdn.pingan.com/baoxianimg/index/foot-bdxgrightbtn.png"
+                                        alt="保单修改"
+                                        width="250"
+                                        height="260"
+                                />
+                            </div>
+                        </a>
+                        <a
+                                href="//property.pingan.com/kehufuwu/fuwugongju/chanxianbaodanchayan.shtml?source=property-gw-bdyz"
+                                target="_blank"
+                                title="保单验真 "
+                                otitle="保单验真 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2 line_h10"
+                        >保单验真</a
+                        >
+                    </li>
+                    <li class="fl">
+                        <p
+                                title="保险资料 "
+                                otitle="保险资料 "
+                                otype="menu"
+                                class="fs16 fc2c2c2c dis_b lin_h30 fwb"
+                        >
+                            保险资料
+                        </p>
+                        <a
+                                href="/baoxianfuwu/index.shtml"
+                                target="_blank"
+                                title="保险服务 "
+                                otitle="保险服务 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2"
+                        >保险服务</a
+                        >
+                        <a
+                                href="/baoxianfuwu/lipei/download.shtml"
+                                target="_blank"
+                                title="资料下载 "
+                                otitle="资料下载 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2 line_h08"
+                        >资料下载</a
+                        >
+                        <a
+                                href="/baoxianfuwu/lipei/faq_Register.shtml"
+                                target="_blank"
+                                title="注册教程 "
+                                otitle="注册教程 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2 line_h10"
+                        >注册教程</a
+                        >
+                    </li>
+
+                    <li class="fl">
+                        <p
+                                title="关于平安 "
+                                otitle="关于平安 "
+                                otype="menu"
+                                class="fs16 fc2c2c2c dis_b lin_h30 fwb"
+                        >
+                            关于平安
+                        </p>
+                        <a
+                                href="//pingan.cn/about/honour.shtml"
+                                target="_blank"
+                                title="品牌故事 "
+                                otitle="品牌故事 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2"
+                        >品牌故事</a
+                        >
+                        <a
+                                href="//property.pingan.com/map/indexMap.shtml"
+                                target="_blank"
+                                title="门店网点 "
+                                otitle="门店网点 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2"
+                        >门店网点</a
+                        >
+                        <a
+                                href="//property.pingan.com/gongkaixinxipilu/changfunenglixinxipilubaogao.shtml"
+                                target="_blank"
+                                title="偿付能力信息披露 "
+                                otitle="偿付能力信息披露 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2"
+                        >偿付能力信息披露</a
+                        >
+                        <a
+                                href="//property.pingan.com/gongkaixinxipilu/gongsigaikuang.shtml"
+                                target="_blank"
+                                title="消费者保护监管评价 "
+                                otitle="消费者保护监管评价 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2"
+                        >消费者保护监管评价</a
+                        >
+                        <a
+                                href="//property.pingan.com/gongkaixinxipilu/gongsigaikuang.shtml"
+                                target="_blank"
+                                title="公开信息披露 "
+                                otitle="公开信息披露 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2"
+                        >公开信息披露</a
+                        >
+                        <a
+                                href="//icid.iachina.cn/?columnid_url=201509301401"
+                                target="_blank"
+                                title="互联网保险信息披露 "
+                                otitle="互联网保险信息披露 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2"
+                        >互联网保险信息披露</a
+                        >
+                    </li>
+                    <li class="fl">
+                        <p
+                                title="站外APP "
+                                otitle="站外APP "
+                                otype="menu"
+                                class="fs16 fc2c2c2c dis_b lin_h30 fwb"
+                        >
+                            站外APP
+                        </p>
+                        <a
+                                id="foot-pahcz"
+                                href="javascript:;"
+                                title=""
+                                otitle="平安好车主 "
+                                otype="menu"
+                                class="fs14 dis_b fc323232 lin_h30 fooder_left_a2 por"
+                        >平安好车主
+                            <div class="foot-ewm-hover dis_no">
+                                <img
+                                        src="//pimg1.4008000000.com/app_images/baoxian/v10/baoxian_index/foot_ewmhcz.png"
+                                        alt="平安好车主"
+                                        width="115"
+                                        height="115"
+                                />
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="fl">
+                <div class="fl foot_ewmbox">
+                    <p class="foot_ewm foot_ewm01"></p>
+                    <p class="fooT_ewm_txt">平安保险好生活</p>
+                    <p class="fooT_ewm_txt" style="padding-top: 0px">公众号</p>
+                </div>
+                <div class="fl foot_ewmbox">
+                    <p class="foot_ewm foot_ewm02"></p>
+                    <p class="fooT_ewm_txt">平安保险好生活</p>
+                    <p class="fooT_ewm_txt" style="padding-top: 0px">APP</p>
+                </div>
+                <!-- <div class="fl foot_ewmbox">
+                          <p class="foot_ewm foot_ewm04"></p>
+                          <p class="fooT_ewm_txt">天猫官方旗舰店</p>
+                      </div> -->
+            </div>
+            <div class="fr tar por">
+                <p class="fs16 pt6pb4 fc323232">
+                    官方客服：<span class="fcfe6100">40088-95512转2</span><br />
+                    企业客户：<span class="fcfe6100">40088-95512转3</span>
+                </p>
+                <a
+                        class="kefu"
+                        target="_blank"
+                        href="/zaixiankefu/index.shtml"
+                        title="在线咨询"
+                        otitle="在线咨询"
+                        otype="button"
+                ><i class="index_jqr"></i>在线咨询</a
+                >
+            </div>
+        </div>
+        <div class="copyright fs14 text_c">
+            <div class="footer-logo">
+                <img class="pingan_logo" src="../../../logo/pingan-logo@2x.png" title="中国平安" />
+                <img class="cx_logo" src="../../../logo/cx-logo.png" title="中国平安财产保险" />
+            </div>
+            <p>
+                版权所有 © 中国平安保险（集团）股份有限公司
+                未经许可不得复制、转载或摘编，违者必究!
+            </p>
+            <p>
+                Copyright © Ping an insurance (group) company of china ,LTD. all rights
+                reserved
+            </p>
+            <div class="c tac">
+                <p class="dis_inline">ICP许可证号 粤ICP备06118290号-2</p>
+                <div class="copyright_por dis_inline">
+                    <a
+                            target="_blank"
+                            href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030402000932"
+                    ><img
+                            src="//pimg1.4008000000.com/app_images/baoxian/v10/por_icon.png"
+                            class="fl"
+                    />
+                        <p>粤公网安备 44030402000932号</p>
+                    </a>
+                </div>
+            </div>
+            <p>本网站支持IPv6</p>
+        </div>
+    </div>
+    <!-- <script src="//baoxiancdn.pingan.com/baoxianjs/app_js/4008000000/v10/hide-tiaokuan.js" type="text/javascript" ></script> -->
+    <script
+            src="//baoxiancdn.pingan.com/pa18shopnst/lib/underscore-1.6.0-min.js"
+            type="text/javascript"
+    ></script>
+    <script
+            src="//baoxiancdn.pingan.com/baoxianjs/index/burryPadweb.js"
+            type="text/javascript"
+    ></script>
+    <!--加载条款-->
+    <script src="/baoxianjs/index/tiaokuan.js" type="text/javascript"></script>
+    <!-- 加载投保须知 -->
+    <!-- <script src="/product/js/insure-notice.js"></script> -->
+
+    <!--底部 end-->
+    <!-- END: 公用底部 -->
+    <!-- START: 跟随页面滚动 -->
+    <div class="kefu_right">
+        <a class="kefu_topbtn kefu_topbtn_news" href="/product/notificationPage.shtml" title="消息通知" otitle="消息通知" otype="button">
+            <img class="kefu_right_new" src="//baoxiancdn.pingan.com/baoxianimg/headFoot/home-new.gif" alt="new">
+            <i class="kefu_r_img" ></i>
+            <p class="kefu_title">消息通知</p>
+        </a>
+        <a class="kefu_qiyebtn" href="javascript:;" title="" otitle="企业咨询" otype="button">
+            <i class="icon_qiye_zixun kefu_r_tel"></i>
+            <p class="kefu_qiyetitle qiyetextshadow">电话咨询</p>
+        </a>
+        <!--显示电话 start-->
+        <div class="qiyekefu_hover qiyetextshadow">
+            <div class="por">
+                <p  style="padding-top:10px;">
+                    <span>4008895512转2</span><br>
+                    <span style="font-size:13px;">(企业用户转3)</span>
+                </p>
+                <div class="qiye_arrow"></div>
+            </div>
+        </div>
+        <!--显示电话 end-->
+        <!-- 在线客服 start-->
+        <a class="kefu_topbtn" target="_blank" href="http://eim.pingan.com.cn/web/webtalk?encryptStr=&businessType=CAR_INS_EXT&enterpage=%E5%B9%B3%E5%AE%89%E4%BF%9D%E9%99%A9%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8D%2C%E5%B9%B3%E5%AE%89%E7%90%86%E8%B5%94%E6%9F%A5%E8%AF%A2%2C%E5%B9%B3%E5%AE%89%E7%90%86%E8%B5%94%E7%B3%BB%E7%BB%9F-%20%E4%B8%AD%E5%9B%BD%E5%B9%B3%E5%AE%89%E5%AE%98%E6%96%B9%E7%9B%B4%E9%94%80%E7%BD%91%E7%AB%99" title="在线客服" otitle="在线客服" otype="button">
+            <i class="zaixian_r_img"></i>
+            <p class="kefu_title">在线客服</p>
+        </a>
+        <!-- 在线客服 end-->
+        <div id="return_top">
+            <div class="kefu_line"></div>
+            <a href="javascript:;" class="back_topbtn" title="回顶部" otitle="回顶部" otype="button">
+                <i class="backtop_r_img"></i>
+                <p class="kefu_title">回顶部</p>
+            </a>
+        </div>
+    </div>
+    <!--右边浮窗在线客服固定 end-->
+
+    <!-- END: 跟随页面滚动 -->
+    <!-- 动态生成产品start -->
+    <script>
+        (function () {
+        Array.prototype.my_filter = function (callback) {
+        if (!Array.isArray(this) || !this.length || typeof callback !== 'function') {
+        return []
+        } else {
+        var result = [];
+        for (var index = 0; index < this.length; index++) {
+        var item = this[index];
+        if (callback(item, index, this)) {
+        result.push(item)
+        }
+        }
+        return result
+        }
+        }
+        var CategoryProductsAll = JSON.parse(window.sessionStorage.getItem("CategoryProductsAll"))
+        if(CategoryProductsAll && Object.keys(CategoryProductsAll).length !== 0){
+        CategoryProductsAll = CategoryProductsAll.my_filter(function(item){
+        return item.categoryCode == "PC_HEALTHY"
+        })
+        dealProductsHEALTHY(CategoryProductsAll);
+        }else {
+        $.ajax({
+        type:"get",
+        url:"/pa18shopnst/do/era/shopProduct/queryCategoryProducts?categoryCode=PC_HEALTHY",
+        async:false,
+        dataType: "json",
+        success: function (res) {
+        if(res.resultCode == "200"){
+        $("#all_product_list").empty()
+        var datas = res.data;
+        dealProductsHEALTHY(datas);
+        }else {
+        console.error && console.error('产品类型查询失败，请重新试试！');
+        }
+        },
+        error: function () {
+        console.error && console.error('网络错误，请重新试试！');
+        }
+        })
+        }
+        function dealProductsHEALTHY(datas){
+        for(var I = 0;I < datas.length;I++){
+        var Item = datas[I];
+        for(var i = 0;i < Item.categoryProducts.length;i++){
+        var item = Item.categoryProducts[i]
+        if(item.hotProductFlag == "Y"){
+        item.hotProductFlag = true;
+        }else {
+        item.hotProductFlag = false;
+        }
+        var urlParams = window.location.search;
+        if(urlParams && item.productUrl.indexOf("?") != -1){
+        urlParams = urlParams.replace("?", "&")
+        item.productUrl = item.productUrl + urlParams;
+        }else if(urlParams && item.productUrl.indexOf("?") == -1){
+        item.productUrl = item.productUrl + urlParams;
+        }
+        if(!item.priceUnit){
+        item.priceUnit = "/起"
+        }
+        var template = $('#productTemplate').html();
+        var html = Mustache.to_html(template,item);
+        $("#all_product_list").append(html);
+        }
+        }
+        }
+        })();
+    </script>
+    <!-- 动态生成产品end -->
+    <script src="//baoxiancdn.pingan.com/baoxianjs/app_js/baoxian/v10/swiper.js"></script>
+    <script>
+        //分页，显示更多
+        $(".list_pro_morebtn").click(function () {
+        var len = $(".list_product li").length - 1;
+        show_click_img(len);
+        $(".list_pro_more").css("display", "none");
+        });
+
+        function show_click_img(li_num) {
+        if (li_num < 17) {
+        $(".list_pro_more").css("display", "none");
+        } else {
+        $(".list_pro_more").css("display", "block");
+        }
+        $(".list_product li").css("display", "none");
+        $(".list_product li").eq(li_num).prevAll().css("display", "block").animate({}, 1000, function () {
+
+
+        });
+        $(".list_product li").eq(li_num).css("display", "block").animate({}, 1000, function () {
+
+        });
+        }
+        //默认显示5个产品，点击更多显示剩余的产品
+        var len = $(".list_product li").length - 1;
+        len = len < 17 ? len : 17;
+        show_click_img(len);
+    </script>
+    <script type="text/javascript" src="//baoxiancdn.pingan.com/baoxianjs/app_js/4008000000/v10/public.js"></script>
+    <script type="text/javascript" src="//baoxiancdn.pingan.com/baoxianjs/app_js/baoxian/v10/cuspage.js"></script>
+    <script type="text/javascript" src="//baoxiancdn.pingan.com/baoxianjs/public/baoxian_public.js"></script>
+    <script type="text/javascript" src="//baoxiancdn.pingan.com/baoxianjs/app_js/4008000000/v20/prolist.js"></script>
+    <script type="text/javascript" src="//baoxiancdn.pingan.com/baoxianjs/app_js/youhui/v30/getMediaSource.js"></script>
+
+    <!-- START: 百度统计代码 -->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?2f53c35010dbe120000b9a32bd028225";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!-- END: 百度统计代码 -->
+    <!-- webtrends 监控 -->
+    <script language="javascript" type="text/javascript">
+        function exesdcjs() {
+        var jDomain = "www.4008000000.com";
+        var js_path = "/app_js/sdc/src/web.js";
+        var domain = "http" + (window.location.protocol.indexOf('https:') == 0 ? 's' : '') + "://" + jDomain;
+        var SDC_js = document.createElement("script");
+        SDC_js.src = domain + js_path;
+        var headElem = document.getElementsByTagName("head")[0];
+        headElem.appendChild(SDC_js);
+        }
+        setTimeout('exesdcjs()', 0);
+    </script>
+
+
+    <script src="//baoxiancdn.pingan.com/baoxianjs/app_js/youhui/v30/hrefChange.js" type="text/javascript"></script>
+    <script src="//baoxiancdn.pingan.com/baoxianjs/app_js/4008000000/v10/hide-tiaokuan.js" type="text/javascript">
+    </script>
+
+    <!--[if lte IE 6]>
+    <script src="//baoxiancdn.pingan.com/app_js/pingan/v20/caifu/DD_belatedPNG.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    DD_belatedPNG.fix('i ,a ,label ,.pic ,dt ,img');
+    </script>
+    <![endif]-->
+    <!--部署代码-->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-86814823-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <!-- 360 ca -->
+    <script>
+        (function (b, a, e, h, f, c, g, s) {
+        b[h] = b[h] || function () {
+        (b[h].c = b[h].c || []).push(arguments)
+        };
+        b[h].s = !!c;
+        g = a.getElementsByTagName(e)[0];
+        s = a.createElement(e);
+        s.src = "//s.union.360.cn/" + f + ".js";
+        s.defer = !0;
+        s.async = !0;
+        g.parentNode.insertBefore(s, g)
+        })(window, document, "script", "_qha", 495348, false);
+    </script>
+</body>
+        <!-- bd ca -->
+<script>
+var _hmt = _hmt || [];
+(function () {
+var hm = document.createElement("script");
+hm.src = "https://hm.baidu.com/hm.js?849e3e809d050ec9512c9a00c350aee2";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        </html>

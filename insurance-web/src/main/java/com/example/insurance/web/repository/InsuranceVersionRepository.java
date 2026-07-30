@@ -1,8 +1,8 @@
 
 package com.example.insurance.web.repository;
 
+import com.example.insurance.api.entity.InsuranceVersion;
 import com.example.insurance.api.enums.SyncStatus;
-import com.example.insurance.web.entity.InsuranceVersion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

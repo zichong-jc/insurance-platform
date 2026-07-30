@@ -2,9 +2,9 @@
 package com.example.insurance.web.service;
 
 import com.example.insurance.api.dto.response.ProductCompareResponse;
+import com.example.insurance.api.entity.InsuranceProduct;
+import com.example.insurance.api.repository.InsuranceProductRepository;
 import com.example.insurance.common.exception.ResourceNotFoundException;
-import com.example.insurance.web.entity.InsuranceProduct;
-import com.example.insurance.web.repository.InsuranceProductRepository;
 import com.example.insurance.web.repository.InsuranceVersionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
