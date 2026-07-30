@@ -83,5 +83,9 @@ application-local.yml
 application-local.properties
 .env
 
+# Docker
+docker-compose.local.yml
+docker-compose.override.yml
+
 # Maven local repo (if used)
 Maven/jar/
