@@ -4,10 +4,10 @@ package com.example.insurance.web.service;
 import com.example.insurance.api.dto.request.InsuranceVersionRequest;
 import com.example.insurance.api.dto.response.InsuranceVersionResponse;
 import com.example.insurance.api.entity.InsuranceVersion;
-import com.example.insurance.api.enums.SyncStatus;
+import com.example.insurance.api.enums.VersionStatus;
 import com.example.insurance.api.repository.InsuranceProductRepository;
 import com.example.insurance.common.exception.ResourceNotFoundException;
-import com.example.insurance.web.repository.InsuranceVersionRepository;
+import com.example.insurance.api.repository.InsuranceVersionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -52,7 +52,7 @@ public class VersionService {
                 .versionNumber(request.getVersionNumber())
                 .hash(request.getHash())
                 .downloadUrl(request.getDownloadUrl())
-                .status(SyncStatus.PENDING)
+                .status(VersionStatus.DRAFT)
                 .build();
         
         InsuranceVersion saved = versionRepository.save(version);
@@ -76,7 +76,7 @@ public class VersionService {
     }
 
     @Transactional
-    public InsuranceVersionResponse updateSyncStatus(Long versionId, SyncStatus status) {
+    public InsuranceVersionResponse updateSyncStatus(Long versionId, VersionStatus status) {
         log.info("Updating sync status for version: {} to {}", versionId, status);
         
         InsuranceVersion version = versionRepository.findById(versionId)

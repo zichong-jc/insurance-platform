@@ -1,6 +1,6 @@
 package com.example.insurance.api.entity;
 
-import com.example.insurance.api.enums.SyncStatus;
+import com.example.insurance.api.enums.VersionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -79,7 +79,7 @@ public class InsuranceVersion {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 20)
     @Builder.Default
-    private SyncStatus status = SyncStatus.PENDING;
+    private VersionStatus status = VersionStatus.DRAFT;
 
     /**
      * 上一个版本ID（版本链）

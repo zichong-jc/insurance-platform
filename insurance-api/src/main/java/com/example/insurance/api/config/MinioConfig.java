@@ -1,5 +1,4 @@
-
-package com.example.insurance.web.config;
+package com.example.insurance.api.config;
 
 import io.minio.MinioClient;
 import lombok.Data;

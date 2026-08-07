@@ -1,12 +1,17 @@
 package com.example.insurance.sync.strategy;
 
 import com.example.insurance.api.entity.InsuranceCompany;
+import com.example.insurance.api.entity.InsuranceDocument;
 import com.example.insurance.api.entity.InsuranceProduct;
+import com.example.insurance.api.entity.InsuranceVersion;
 import com.example.insurance.api.enums.CompanyType;
 import com.example.insurance.api.enums.ProductType;
 import com.example.insurance.api.enums.SyncStatus;
+import com.example.insurance.api.enums.VersionStatus;
 import com.example.insurance.api.repository.InsuranceCompanyRepository;
+import com.example.insurance.api.repository.InsuranceDocumentRepository;
 import com.example.insurance.api.repository.InsuranceProductRepository;
+import com.example.insurance.api.repository.InsuranceVersionRepository;
 import com.example.insurance.sync.config.CompanyApiConfig;
 import com.example.insurance.sync.config.SyncConfig;
 import com.example.insurance.sync.dto.pingan.PingAnProductResponse;
@@ -14,6 +19,7 @@ import com.example.insurance.sync.entity.SyncLog;
 import com.example.insurance.sync.repository.SyncLogRepository;
 import com.example.insurance.sync.service.BrowserAutomationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -43,6 +49,9 @@ public class PingAnSync implements InsuranceSync {
     private final SyncLogRepository syncLogRepository;
     private final InsuranceProductRepository productRepository;
     private final InsuranceCompanyRepository companyRepository;
+    private final InsuranceVersionRepository versionRepository;
+    private final InsuranceDocumentRepository documentRepository;
+    private final com.example.insurance.api.service.MinioStorageService minioStorageService;
     private final SyncConfig syncConfig;
     private final CompanyApiConfig companyApiConfig;
     private final RestTemplate restTemplate;
@@ -69,7 +78,6 @@ public class PingAnSync implements InsuranceSync {
         log.info("Starting sync for Ping An insurance products");
         Instant startTime = Instant.now();
 
-        // 获取或创建保险公司
         InsuranceCompany company = getOrCreateCompany();
 
         SyncLog syncLog = SyncLog.builder()
@@ -80,13 +88,13 @@ public class PingAnSync implements InsuranceSync {
                 .build();
 
         try {
-            // 从产品列表接口获取产品
             List<PingAnProductResponse.ProductData> products = fetchProductList();
             log.info("Fetched {} products from Ping An API", products.size());
 
             int created = 0;
             int updated = 0;
             int skipped = 0;
+            int totalPdfCount = 0;
 
             for (PingAnProductResponse.ProductData productData : products) {
                 try {
@@ -96,6 +104,15 @@ public class PingAnSync implements InsuranceSync {
                         case UPDATED -> updated++;
                         case SKIPPED -> skipped++;
                     }
+
+                    if (result == SyncResult.CREATED || result == SyncResult.UPDATED) {
+                        InsuranceProduct product = productRepository.findByProductCode(productData.getProductCode())
+                                .orElse(null);
+                        if (product != null) {
+                            int pdfCount = syncProductDocuments(product, productData);
+                            totalPdfCount += pdfCount;
+                        }
+                    }
                 } catch (Exception e) {
                     log.error("Failed to sync product: {}", productData.getProductCode(), e);
                     syncLog.setFilesFailed(syncLog.getFilesFailed() + 1);
@@ -103,9 +120,9 @@ public class PingAnSync implements InsuranceSync {
             }
 
             syncLog.setStatus(SyncStatus.SUCCESS);
-            syncLog.setMessage(String.format("Sync completed. Created: %d, Updated: %d, Skipped: %d", 
-                    created, updated, skipped));
-            syncLog.setFilesDownloaded(created + updated);
+            syncLog.setMessage(String.format("Sync completed. Created: %d, Updated: %d, Skipped: %d, PDFs: %d",
+                    created, updated, skipped, totalPdfCount));
+            syncLog.setFilesDownloaded(totalPdfCount);
             syncLog.setFilesSkipped(skipped);
 
         } catch (Exception e) {
@@ -134,17 +151,27 @@ public class PingAnSync implements InsuranceSync {
                 .build();
 
         try {
-            // 根据产品ID从列表中查找并同步
             List<PingAnProductResponse.ProductData> products = fetchProductList();
             Optional<PingAnProductResponse.ProductData> targetProduct = products.stream()
                     .filter(p -> p.getProductId().equals(String.valueOf(productId)))
                     .findFirst();
 
             if (targetProduct.isPresent()) {
-                SyncResult result = syncProductData(company.getId(), targetProduct.get());
+                PingAnProductResponse.ProductData productData = targetProduct.get();
+                SyncResult result = syncProductData(company.getId(), productData);
+
+                if (result == SyncResult.CREATED || result == SyncResult.UPDATED) {
+                    InsuranceProduct product = productRepository.findByProductCode(productData.getProductCode())
+                            .orElseThrow(() -> new RuntimeException("Product not found after sync"));
+
+                    int pdfCount = syncProductDocuments(product, productData);
+                    syncLog.setMessage("Product " + productId + " synced: " + result + ", PDFs downloaded: " + pdfCount);
+                    syncLog.setFilesDownloaded(pdfCount);
+                } else {
+                    syncLog.setMessage("Product " + productId + " synced: " + result);
+                    syncLog.setFilesDownloaded(0);
+                }
                 syncLog.setStatus(SyncStatus.SUCCESS);
-                syncLog.setMessage("Product " + productId + " synced: " + result);
-                syncLog.setFilesDownloaded(result == SyncResult.SKIPPED ? 0 : 1);
             } else {
                 syncLog.setStatus(SyncStatus.FAILED);
                 syncLog.setMessage("Product not found: " + productId);
@@ -175,7 +202,7 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 获取或创建保险公司
+     * Get or create insurance company
      */
     private InsuranceCompany getOrCreateCompany() {
         return companyRepository.findByCode("PAIC")
@@ -191,10 +218,9 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 从产品列表接口获取产品
+     * Fetch product list from API
      */
     private List<PingAnProductResponse.ProductData> fetchProductList() {
-        // 从配置获取接口URL
         CompanyApiConfig.CompanyConfig config = companyApiConfig.getConfigs().get("PING_AN");
         if (config == null || config.getProductListUrl() == null) {
             throw new RuntimeException("Ping An API config not found");
@@ -203,14 +229,12 @@ public class PingAnSync implements InsuranceSync {
         String url = config.getProductListUrl();
         log.info("Fetching product list from: {}", url);
 
-        // 优先使用浏览器自动化（绕过反爬虫）
         try {
             return fetchWithBrowser(url);
         } catch (Exception e) {
             log.warn("Browser automation failed: {}, trying HTTP client...", e.getMessage());
         }
 
-        // 备选：使用HTTP客户端
         try {
             return fetchWithHttpClient(url, config);
         } catch (Exception e) {
@@ -220,16 +244,12 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 使用浏览器自动化获取数据
+     * Fetch data using browser automation
      */
     private List<PingAnProductResponse.ProductData> fetchWithBrowser(String url) {
         log.info("Using browser automation to fetch: {}", url);
 
-        // 使用浏览器获取页面内容
         String pageContent = browserService.fetchPageContent("pingan", url);
-
-        // 从页面中提取JSON数据
-        // 平安的API返回的是JSON，但可能被包裹在HTML中或通过JS加载
         String json = extractJsonFromPage(pageContent);
 
         if (json == null || json.isEmpty()) {
@@ -261,31 +281,24 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 从页面内容中提取JSON
+     * Extract JSON from page content
      */
     private String extractJsonFromPage(String pageContent) {
-        // 尝试直接找到JSON响应
-        // 平安API通常直接返回JSON或在script标签中
-
-        // 方法1：查找script标签中的JSON
         Pattern scriptPattern = Pattern.compile("<script[^>]*>.*?window\\.__INITIAL_STATE__\\s*=\\s*(\\{.*?\\});.*?</script>", Pattern.DOTALL);
         Matcher scriptMatcher = scriptPattern.matcher(pageContent);
         if (scriptMatcher.find()) {
             return scriptMatcher.group(1);
         }
 
-        // 方法2：查找纯JSON响应（API直接返回）
         int jsonStart = pageContent.indexOf("{");
         int jsonEnd = pageContent.lastIndexOf("}");
         if (jsonStart != -1 && jsonEnd != -1 && jsonEnd > jsonStart) {
             String json = pageContent.substring(jsonStart, jsonEnd + 1);
-            // 验证是否是有效的JSON
             if (json.contains("resultCode") && json.contains("data")) {
                 return json;
             }
         }
 
-        // 方法3：查找pre标签中的JSON
         Pattern prePattern = Pattern.compile("<pre[^>]*>(.*?)</pre>", Pattern.DOTALL);
         Matcher preMatcher = prePattern.matcher(pageContent);
         if (preMatcher.find()) {
@@ -299,7 +312,7 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 使用HTTP客户端获取数据
+     * Fetch data using HTTP client
      */
     private List<PingAnProductResponse.ProductData> fetchWithHttpClient(String url, CompanyApiConfig.CompanyConfig config) {
         log.info("Using HTTP client to fetch: {}", url);
@@ -344,7 +357,7 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 从本地JSON文件读取测试数据
+     * Fetch test data from local JSON file
      */
     private List<PingAnProductResponse.ProductData> fetchFromLocalFile() {
         log.info("Loading product data from local file");
@@ -383,39 +396,34 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 同步单个产品数据
+     * Sync single product data
      */
     private SyncResult syncProductData(Long companyId, PingAnProductResponse.ProductData productData) {
         String productCode = productData.getProductCode();
         String productName = productData.getProductName();
 
-        // 优先使用 productCode 检查产品是否已存在
         Optional<InsuranceProduct> existingProductByCode = productRepository
                 .findByProductCode(productCode);
 
         if (existingProductByCode.isPresent()) {
             InsuranceProduct product = existingProductByCode.get();
-            // 检查是否有更新
             boolean hasChanges = checkProductChanges(product, productData);
             if (!hasChanges) {
                 log.debug("Product unchanged, skipping: {}", productCode);
                 return SyncResult.SKIPPED;
             }
 
-            // 更新产品
             updateProduct(product, productData);
             productRepository.save(product);
             log.info("Product updated: {}", productCode);
             return SyncResult.UPDATED;
         }
 
-        // 如果没有 productCode 匹配，再用名称检查（兼容旧数据）
         Optional<InsuranceProduct> existingProductByName = productRepository
                 .findByCompanyIdAndName(companyId, productName);
 
         if (existingProductByName.isPresent()) {
             InsuranceProduct product = existingProductByName.get();
-            // 更新 productCode
             product.setProductCode(productCode);
             updateProduct(product, productData);
             productRepository.save(product);
@@ -423,7 +431,6 @@ public class PingAnSync implements InsuranceSync {
             return SyncResult.UPDATED;
         }
 
-        // 创建新产品
         InsuranceProduct newProduct = createProduct(companyId, productData);
         productRepository.save(newProduct);
         log.info("Product created: {}", productCode);
@@ -431,15 +438,13 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 检查产品是否有变更
+     * Check if product has changes
      */
     private boolean checkProductChanges(InsuranceProduct product, PingAnProductResponse.ProductData productData) {
-        // 比较关键字段
         if (!product.getName().equals(productData.getProductName())) {
             return true;
         }
 
-        // 比较属性字段
         Map<String, Object> properties = product.getProperties();
         if (properties == null) {
             return true;
@@ -461,10 +466,9 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 创建新产品
+     * Create new product
      */
     private InsuranceProduct createProduct(Long companyId, PingAnProductResponse.ProductData productData) {
-        // 构建属性
         Map<String, Object> properties = new HashMap<>();
         properties.put("productId", productData.getProductId());
         properties.put("categoryCode", productData.getCategoryCode());
@@ -479,7 +483,6 @@ public class PingAnSync implements InsuranceSync {
         properties.put("newProductFlag", productData.getNewProductFlag());
         properties.put("productOrder", productData.getProductOrder());
 
-        // 确定产品类型
         ProductType productType = determineProductType(productData.getCategoryCode());
 
         return InsuranceProduct.builder()
@@ -494,7 +497,7 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 更新产品
+     * Update existing product
      */
     private void updateProduct(InsuranceProduct product, PingAnProductResponse.ProductData productData) {
         Map<String, Object> properties = product.getProperties();
@@ -517,7 +520,7 @@ public class PingAnSync implements InsuranceSync {
     }
 
     /**
-     * 根据分类代码确定产品类型
+     * Determine product type from category code
      */
     private ProductType determineProductType(String categoryCode) {
         if (categoryCode == null) {
@@ -533,6 +536,162 @@ public class PingAnSync implements InsuranceSync {
             case "PC_ACCIDENT" -> ProductType.ACCIDENT;
             default -> ProductType.OTHER;
         };
+    }
+
+    /**
+     * Sync product documents (PDF terms)
+     * 1. Visit product detail page
+     * 2. Handle agreement popup
+     * 3. Find all PDF links after "I have read and agree"
+     * 4. Download PDFs and save to MinIO
+     */
+    private int syncProductDocuments(InsuranceProduct product, PingAnProductResponse.ProductData productData) {
+        String productUrl = productData.getProductUrl();
+        if (productUrl == null || productUrl.isEmpty()) {
+            log.warn("No product URL found for product: {}", productData.getProductCode());
+            return 0;
+        }
+
+        log.info("Syncing documents for product: {} from URL: {}", product.getId(), productUrl);
+
+        try {
+            List<PdfDocumentInfo> pdfLinks = browserService.extractPdfLinks("pingan_product_" + product.getId(), productUrl);
+
+            if (pdfLinks.isEmpty()) {
+                log.warn("No PDF links found for product: {}", product.getId());
+                return 0;
+            }
+
+            InsuranceVersion version = createVersion(product, productData, pdfLinks);
+
+            int downloadedCount = 0;
+            for (PdfDocumentInfo pdfInfo : pdfLinks) {
+                try {
+                    downloadAndSavePdf(product, version, pdfInfo);
+                    downloadedCount++;
+                } catch (Exception e) {
+                    log.error("Failed to download PDF: {} for product: {}", pdfInfo.getName(), product.getId(), e);
+                }
+            }
+
+            log.info("Downloaded {} PDF documents for product: {}", downloadedCount, product.getId());
+            return downloadedCount;
+
+        } catch (Exception e) {
+            log.error("Failed to sync documents for product: {}", product.getId(), e);
+            return 0;
+        }
+    }
+
+    /**
+     * Create version record
+     */
+    private InsuranceVersion createVersion(InsuranceProduct product, PingAnProductResponse.ProductData productData, List<PdfDocumentInfo> pdfLinks) {
+        String versionNumber = java.time.format.DateTimeFormatter.ofPattern("yyyy.MM.dd.HHmm")
+                .format(java.time.LocalDateTime.now());
+
+        String hash = calculatePdfHash(pdfLinks);
+
+        InsuranceVersion version = InsuranceVersion.builder()
+                .productId(product.getId())
+                .versionNumber(versionNumber)
+                .versionType("SYNC")
+                .versionDescription("Auto sync version - " + pdfLinks.size() + " documents")
+                .status(VersionStatus.ACTIVE)
+                .syncTime(Instant.now())
+                .hash(hash)
+                .downloadUrl(productData.getProductUrl())
+                .build();
+
+        InsuranceVersion savedVersion = versionRepository.save(version);
+        log.info("Created version: {} for product: {}", versionNumber, product.getId());
+        return savedVersion;
+    }
+
+    /**
+     * Calculate hash of PDF links
+     */
+    private String calculatePdfHash(List<PdfDocumentInfo> pdfLinks) {
+        StringBuilder sb = new StringBuilder();
+        for (PdfDocumentInfo pdf : pdfLinks) {
+            sb.append(pdf.getUrl()).append("|");
+        }
+        return org.springframework.util.DigestUtils.md5DigestAsHex(sb.toString().getBytes());
+    }
+
+    /**
+     * Download and save PDF to MinIO
+     */
+    private void downloadAndSavePdf(InsuranceProduct product, InsuranceVersion version, PdfDocumentInfo pdfInfo) {
+        log.info("Downloading PDF: {} from: {}", pdfInfo.getName(), pdfInfo.getUrl());
+
+        byte[] pdfContent = downloadPdfContent(pdfInfo.getUrl());
+        String fileHash = org.springframework.util.DigestUtils.md5DigestAsHex(pdfContent);
+        String fileName = pdfInfo.getName().replaceAll("[^a-zA-Z0-9\\u4e00-\\u9fa5.]", "_") + ".pdf";
+
+        String objectKey = minioStorageService.generateObjectKey(product.getProductCode(), fileName);
+        String minioUrl = minioStorageService.uploadFile(objectKey, pdfContent, "application/pdf");
+
+        InsuranceDocument document = InsuranceDocument.builder()
+                .versionId(version.getId())
+                .documentType(determineDocumentType(pdfInfo.getName()))
+                .documentName(pdfInfo.getName())
+                .fileUrl(pdfInfo.getUrl())
+                .localPath(minioUrl)
+                .fileHash(fileHash)
+                .fileSize((long) pdfContent.length)
+                .parseStatus("PENDING")
+                .createdTime(Instant.now())
+                .build();
+
+        documentRepository.save(document);
+        log.info("Saved PDF document to MinIO: {} for product: {}", pdfInfo.getName(), product.getId());
+    }
+
+    /**
+     * Download PDF content
+     */
+    private byte[] downloadPdfContent(String url) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36");
+        headers.set("Accept", "application/pdf,*/*");
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, byte[].class);
+
+        return response.getBody();
+    }
+
+    /**
+     * Determine document type from name
+     */
+    private String determineDocumentType(String documentName) {
+        String name = documentName.toLowerCase();
+        if (name.contains("条款") || name.contains("terms")) {
+            return "TERMS";
+        } else if (name.contains("免责") || name.contains("exclusion")) {
+            return "EXCLUSION";
+        } else if (name.contains("投保") || name.contains("underwriting")) {
+            return "UNDERWRITING";
+        } else if (name.contains("续保") || name.contains("renewal")) {
+            return "RENEWAL";
+        } else if (name.contains("保障") || name.contains("coverage")) {
+            return "COVERAGE";
+        } else if (name.contains("须知") || name.contains("notice")) {
+            return "NOTICE";
+        } else if (name.contains("附加") || name.contains("rider")) {
+            return "RIDER";
+        }
+        return "TERMS";
+    }
+
+    /**
+     * PDF document info
+     */
+    @Data
+    public static class PdfDocumentInfo {
+        private String name;
+        private String url;
     }
 
     private enum SyncResult {

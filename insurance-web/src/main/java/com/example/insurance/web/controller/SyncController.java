@@ -1,4 +1,3 @@
-
 package com.example.insurance.web.controller;
 
 import com.example.insurance.api.dto.response.SyncLogResponse;
@@ -22,35 +21,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/sync")
 @RequiredArgsConstructor
-@Tag(name = "Sync", description = "数据同步接口")
+@Tag(name = "Sync", description = "Data synchronization APIs")
 public class SyncController {
 
     private final SyncService service;
 
     @PostMapping("/companies/{companyCode}")
-    @Operation(summary = "同步指定保险公司数据")
+    @Operation(summary = "Sync data for specified insurance company")
     public Result<SyncLogResponse> syncCompany(
-            @Parameter(description = "公司代码") @PathVariable String companyCode) {
+            @Parameter(description = "Company code") @PathVariable String companyCode) {
         log.info("POST /api/v1/sync/companies/{}", companyCode);
         SyncLog syncLog = service.syncCompany(companyCode);
         return Result.success(toResponse(syncLog));
     }
 
     @PostMapping("/companies/{companyCode}/products/{productId}")
-    @Operation(summary = "同步指定产品")
+    @Operation(summary = "Sync specified product")
     public Result<SyncLogResponse> syncProduct(
-            @Parameter(description = "公司代码") @PathVariable String companyCode,
-            @Parameter(description = "产品ID") @PathVariable Long productId) {
+            @Parameter(description = "Company code") @PathVariable String companyCode,
+            @Parameter(description = "Product ID") @PathVariable Long productId) {
         log.info("POST /api/v1/sync/companies/{}/products/{}", companyCode, productId);
         SyncLog syncLog = service.syncProduct(companyCode, productId);
         return Result.success(toResponse(syncLog));
     }
 
     @GetMapping("/logs")
-    @Operation(summary = "查询同步日志")
+    @Operation(summary = "Query sync logs")
     public PageResult<SyncLogResponse> getSyncLogs(
-            @Parameter(description = "页码") @RequestParam(defaultValue = "0") Integer page,
-            @Parameter(description = "每页数量") @RequestParam(defaultValue = "10") Integer size) {
+            @Parameter(description = "Page number") @RequestParam(defaultValue = "0") Integer page,
+            @Parameter(description = "Page size") @RequestParam(defaultValue = "10") Integer size) {
         log.info("GET /api/v1/sync/logs?page={}&size={}", page, size);
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "syncTime"));
         Page<SyncLog> logs = service.getSyncLogs(pageRequest);
@@ -59,20 +58,20 @@ public class SyncController {
     }
 
     @GetMapping("/logs/{id}")
-    @Operation(summary = "查询同步日志详情")
+    @Operation(summary = "Query sync log detail")
     public Result<SyncLogResponse> getSyncLog(
-            @Parameter(description = "日志ID") @PathVariable Long id) {
+            @Parameter(description = "Log ID") @PathVariable Long id) {
         log.info("GET /api/v1/sync/logs/{}", id);
         SyncLog syncLog = service.getSyncLog(id);
         return Result.success(toResponse(syncLog));
     }
 
     @GetMapping("/logs/company/{companyId}")
-    @Operation(summary = "查询指定公司的同步日志")
+    @Operation(summary = "Query sync logs for specified company")
     public PageResult<SyncLogResponse> getSyncLogsByCompany(
-            @Parameter(description = "公司ID") @PathVariable Long companyId,
-            @Parameter(description = "页码") @RequestParam(defaultValue = "0") Integer page,
-            @Parameter(description = "每页数量") @RequestParam(defaultValue = "10") Integer size) {
+            @Parameter(description = "Company ID") @PathVariable Long companyId,
+            @Parameter(description = "Page number") @RequestParam(defaultValue = "0") Integer page,
+            @Parameter(description = "Page size") @RequestParam(defaultValue = "10") Integer size) {
         log.info("GET /api/v1/sync/logs/company/{}", companyId);
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "syncTime"));
         Page<SyncLog> logs = service.getSyncLogsByCompany(companyId, pageRequest);
@@ -81,7 +80,7 @@ public class SyncController {
     }
 
     @GetMapping("/companies")
-    @Operation(summary = "获取支持的保险公司列表")
+    @Operation(summary = "Get supported insurance company list")
     public Result<List<String>> getSupportedCompanies() {
         log.info("GET /api/v1/sync/companies");
         List<String> companies = service.getSupportedCompanies();

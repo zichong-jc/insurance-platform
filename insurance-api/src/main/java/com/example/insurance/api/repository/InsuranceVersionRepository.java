@@ -1,5 +1,4 @@
-
-package com.example.insurance.web.repository;
+package com.example.insurance.api.repository;
 
 import com.example.insurance.api.entity.InsuranceVersion;
 import com.example.insurance.api.enums.VersionStatus;
