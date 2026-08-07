@@ -1,5 +1,6 @@
 package com.example.insurance.web.entity;
 
+import com.example.insurance.api.entity.InsuranceDocument;
 import com.example.insurance.common.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

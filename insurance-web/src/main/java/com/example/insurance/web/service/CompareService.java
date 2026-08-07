@@ -5,7 +5,7 @@ import com.example.insurance.api.dto.response.ProductCompareResponse;
 import com.example.insurance.api.entity.InsuranceProduct;
 import com.example.insurance.api.repository.InsuranceProductRepository;
 import com.example.insurance.common.exception.ResourceNotFoundException;
-import com.example.insurance.web.repository.InsuranceVersionRepository;
+import com.example.insurance.api.repository.InsuranceVersionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -28,6 +28,12 @@ public class InsuranceDocument extends BaseEntity {
     private Long versionId;
 
     /**
+     * 产品ID（直接关联InsuranceProduct，用于快速查询）
+     */
+    @Column(name = "product_id")
+    private Long productId;
+
+    /**
      * 文档类型：TERMS-条款, CLAUSE-章节, RIDER-附加险, NOTICE-投保须知, 
      * COVERAGE-保障责任, EXCLUSION-免责条款, UNDERWRITING-投保规则, RENEWAL-续保规则
      */

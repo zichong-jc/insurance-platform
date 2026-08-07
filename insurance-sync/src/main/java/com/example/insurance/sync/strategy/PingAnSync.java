@@ -634,6 +634,7 @@ public class PingAnSync implements InsuranceSync {
 
         InsuranceDocument document = InsuranceDocument.builder()
                 .versionId(version.getId())
+                .productId(product.getId())
                 .documentType(determineDocumentType(pdfInfo.getName()))
                 .documentName(pdfInfo.getName())
                 .fileUrl(pdfInfo.getUrl())

@@ -14,7 +14,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+    "com.example.insurance.web",
+    "com.example.insurance.common",
+    "com.example.insurance.api"
+})
 @EnableConfigurationProperties
 @EnableAsync
 @EntityScan(basePackages = {
